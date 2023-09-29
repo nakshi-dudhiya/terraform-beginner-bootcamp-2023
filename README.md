@@ -208,14 +208,18 @@ Apply should prompt us yes or no.
 
 To automatically approve an apply, use the command `terraform apply --auto-approve`
 
+#### Terraform Destroy
 
-### Terraform Lock Files
+The `terraform destroy` is used to destroy the resources.
+You can also use the auto approve for destroy. eg. `terraform destroy --auto-approve`
+
+#### Terraform Lock Files
 
 `.terraform.lock.hcl` contains the locked versioning for the providers or modules that should be used with this project.
 
 The Terraform Lock File **should be commited** to your Version Control System (VCS) eg. Github
 
-### Terraform State Files
+#### Terraform State Files
 
 `terraform.tfstate` constains information about the current state of your infrastructure
 
@@ -227,6 +231,11 @@ If you lose this file, you lose knowing the state of your infrastructure.
 
 `.terraform.tfstate.backup` is the previous state file state.
 
-### Terraform Directory
+#### Terraform Directory
 
 `.terraform` directory contains binaries of terraform providers.
+
+
+## Things to Remember
+
+- Do not forget to check the naming rules for S3 bucket while creating a bucket using Terraform.
