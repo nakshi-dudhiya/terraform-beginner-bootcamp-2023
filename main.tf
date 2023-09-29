@@ -1,4 +1,20 @@
 terraform {
+  #backend "remote"{
+  # hostname="app.terraform.io"
+  # organization= "Ncodes"  
+     
+  #    workspaces{
+  #      name="terra-house-ncodes"
+  #    }
+  #}
+  
+  cloud {
+    organization = "Ncodes"
+
+    workspaces {
+      name = "terra-house-ncodes"
+    }
+  }
   required_providers {
     random = {
       source = "hashicorp/random"
