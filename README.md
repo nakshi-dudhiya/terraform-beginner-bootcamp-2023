@@ -116,6 +116,7 @@ https://www.gitpod.io/docs/configure/workspaces/tasks
 
 Within a bash script, we can set env without writing export.
 Eg:
+
 ```sh
 #!/usr/bin/bash
 GREETING='Hello World'
