@@ -262,6 +262,8 @@ Provide the following code (dont forget to replace your token):
 }
 ```
 
+We have automated this workaround with the following bash script [bin/generate_tfrc_creds](./bin/generate_tfrc_creds)
+
 
 ## Things to Remember
 
