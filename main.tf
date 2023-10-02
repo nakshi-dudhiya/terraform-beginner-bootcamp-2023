@@ -1,39 +1,3 @@
-terraform {
-  #backend "remote"{
-  # hostname="app.terraform.io"
-  # organization= "Ncodes"  
-     
-  #    workspaces{
-  #      name="terra-house-ncodes"
-  #    }
-  #}
-  
-  cloud {
-    organization = "Ncodes"
-
-    workspaces {
-      name = "terra-house-ncodes"
-    }
-  }
-  required_providers {
-    random = {
-      source = "hashicorp/random"
-      version = "3.5.1"
-    }
-    aws = {
-      source = "hashicorp/aws"
-      version = "5.19.0"
-    }
-  }
-}
-
-provider "aws" {
-  # Configuration options
-}
-
-provider "random" {
-  # Configuration options
-}
 
 # Ref => https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string
 resource "random_string" "bucket_name" {
@@ -47,9 +11,11 @@ resource "random_string" "bucket_name" {
 # S3 Bucket Naming rule => https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
 resource "aws_s3_bucket" "example" {
   bucket = random_string.bucket_name.result
+
+  tags={
+    UserUuid= var.user_uuid
+  }
 }
 
 
-output "random_bucket_name" {
-    value = random_string.bucket_name.result
-}
+
