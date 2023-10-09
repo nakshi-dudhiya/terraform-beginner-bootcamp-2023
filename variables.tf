@@ -6,6 +6,10 @@ variable "bucket_name" {
  type = string
 }
 
+variable "content_version" {
+  type = number
+}
+
 variable "index_html_filepath" {
   type = string
 }
