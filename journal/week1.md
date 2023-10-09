@@ -1,4 +1,42 @@
 # Terraform Beginner Bootcamp - WEEK 1
+
+## Fixing Git Tags
+
+If you have inadvertantly tagged a git branch and want to correct it, then you must have to change it locally and then remotely. 
+
+To delete a specific `tag locally` ====> 
+
+```
+git tag -d 0.4.0
+
+or 
+
+git tag -d <tag_name>
+```
+
+To delete `tag remotely` ====>
+
+```
+git push --delete origin 0.4.0
+
+OR
+
+git push --delete origin <tag_name>
+```
+
+Now go to your commit history and grab the `SHA` of that commit that you want to `retag`. 
+
+```
+git checkout <SHA>
+git tag Major.Minor.Patch
+git push --tags
+git checkout main
+```
+
+Read [here](https://devconnected.com/how-to-delete-local-and-remote-tags-on-git/) to know more about it. 
+
+
+
 ## Root Module Structure
 
 Our root module structure is as follows:
@@ -153,3 +191,43 @@ resource "aws_s3_object" "index_html" {
   key    = "index.html"
   source = "${path.root}/public/index.html"
 }
+
+## Terraform Locals
+
+Terraform Locals are named values which can be assigned and used in your code. It mainly serves the purpose of reducing duplication within the Terraform code. When you use Locals in the code, since you are reducing duplication of the same value, you also increase the readability of the code.
+
+```
+locals {
+  s3_origin_id = "myS3Origin"
+}
+```
+
+***[Terraform Locals](https://developer.hashicorp.com/terraform/language/values/locals)***
+
+
+## Terraform Data Sources
+
+Data sources allow Terraform to use information defined outside of Terraform, defined by another separate Terraform configuration. For example, your AWS Account ID, list of IPs exposed by your cloud provider etc...
+
+```
+data "aws_caller_identity" "current" {}
+
+output "account_id" {
+  value = data.aws_caller_identity.current.account_id
+}
+```
+
+***[Terraform Data Sources](https://developer.hashicorp.com/terraform/language/data-sources)***
+
+## JSON Format
+
+jsonencode encodes a given value to a string using JSON syntax. 
+
+```
+> jsonencode({"hello"="world"})
+{"hello":"world"}
+```
+
+It is helpful in creation of the json policy. 
+
+***[jsonencode Function](https://developer.hashicorp.com/terraform/language/functions/jsonencode)***
