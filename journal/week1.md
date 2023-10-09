@@ -231,3 +231,13 @@ jsonencode encodes a given value to a string using JSON syntax.
 It is helpful in creation of the json policy. 
 
 ***[jsonencode Function](https://developer.hashicorp.com/terraform/language/functions/jsonencode)***
+
+### Changing the Lifecycle of Resources
+
+[Meta Arguments Lifcycle](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
+
+
+## Terraform Data
+
+Plain data values such as Local Values and Input Variables don't have any side-effects to plan against and so they aren't valid in replace_triggered_by. You can use terraform_data's behavior of planning an action each time input changes to indirectly use a plain value to trigger replacement.
+[Terraform Data](https://developer.hashicorp.com/terraform/language/resources/terraform-data)
