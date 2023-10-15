@@ -6,7 +6,9 @@ package main
 // fmt is short format, it contains functions for //formatted I/O.
 import (
    "fmt"
-   //"log"
+   "log"
+   "context"
+   "github.com/google/uuid"
    "github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
    "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
    "github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -61,12 +63,57 @@ func Provider() *schema.Provider{
    return p
 }
 
-//func validateUUID(v interface{}, k string) (ws []string, errors []error) {
-//	log.Print("validateUUID:start")
-//	value := v.(string)
-//	if _, err := uuid.Parse(value); err != nil {
-//		errors = append(errors, fmt.Errorf("invalid UUID format"))
-//	}
-//	log.Print("validateUUID:end")
-//	return
-//}
+func validateUUID(v interface{}, k string) (ws []string, errors []error) {
+	log.Print("validateUUID:start")
+	value := v.(string)
+	if _, err := uuid.Parse(value); err != nil {
+		errors = append(errors, fmt.Errorf("invalid UUID format"))
+	}
+	log.Print("validateUUID:end")
+	return
+}
+
+func providerConfigure(p *schema.Provider) schema.ConfigureContextFunc {
+	return func(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics ) {
+		log.Print("providerConfigure:start")
+		config := Config{
+			Endpoint: d.Get("endpoint").(string),
+			Token: d.Get("token").(string),
+			UserUuid: d.Get("user_uuid").(string),
+		}
+		log.Print("providerConfigure:end")
+		return &config, nil
+	}
+}
+
+func Resource() *schema.Resource {
+	log.Print("Resource:start")
+	resource := &schema.Resource{
+		CreateContext: resourceHouseCreate,
+		ReadContext: resourceHouseRead,
+		UpdateContext: resourceHouseUpdate,
+		DeleteContext: resourceHouseDelete,
+   }
+   return resource
+}
+
+func resourceHouseCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+   return diags
+}
+
+func resourceHouseRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+   return diags
+}
+
+
+func resourceHouseUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+   return diags
+}
+
+func resourceHouseDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+   return diags
+}
