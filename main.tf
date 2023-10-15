@@ -25,7 +25,7 @@ terraform {
 }
 
 provider "terratowns" {
-  endpoint= "http://localhost:4567/api"
+  endpoint= "http://localhost:4567"
   user_uuid="e328f4ab-b99f-421c-84c9-4ccea042c7d1" 
   token="9b49b3fb-b8e9-483c-b703-97ba88eef8e0"
 } 
@@ -40,16 +40,6 @@ provider "terratowns" {
 #  assets_path = var.assets_path
 #}
 
-resource "terratowns_home" "home" {
-  name = "Toyland!!"
-  description = <<DESCRIPTION
-A town made of toys where we play all day
-DESCRIPTION
-  #domain_name = module.terrahouse_aws.cloudfront_url
-  domain_name = "3fdzznn3.cloudfront.net"
-  town = "gamers-groto"
-  content_version = 1
-}
 
 
 
