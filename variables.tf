@@ -9,24 +9,16 @@ variable "terratowns_access_token" {
 variable "teacherseat_user_uuid" {
  type = string
 }
-
-
-variable "bucket_name" {
- type = string
+variable "toyland" {
+  type = object({
+    public_path = string
+    content_version = number
+  })
 }
 
-variable "content_version" {
-  type = number
-}
-
-variable "index_html_filepath" {
-  type = string
-}
-
-variable "error_html_filepath" {
-  type = string
-}
-
-variable "assets_path" {
-  type = string
+variable "camping" {
+  type = object({
+    public_path = string
+    content_version = number
+  })
 }
